@@ -1,6 +1,6 @@
-#include <iostream>
-#include <string.h>
-#include <time.h>
+#include<iostream>
+#include<string.h>
+#include<time.h> //시간을 이용한 난수 생성 헤더 파일
 using namespace std;
 
 //트럼프카드 출력, 구조체이용
@@ -10,24 +10,17 @@ int main()
 {
 	srand(time(NULL));
 
-	// 문자열 char*, char[]
-	// 문자열 string
-	string shape = "◆";
+	//문자열 char*, char[]
+	//문자열 string
 	
-	cout << shape << endl;
-
-	/////////////////
-
-	int deck[52] = {0};
+	int deck[52] = { 0 };
 	for (int i = 0; i < 52; i++)
 	{
-		deck[i] = i; // 0~ 51
+		deck[i] = i; //0~51
 	}
 
-	/////////////////
-
 	//구조체
-	//구조체선언 구조체이름
+	//구조체 선언, 구조체이름
 	struct CARD
 	{
 		//멤버
@@ -36,74 +29,41 @@ int main()
 	};
 
 	//배열 왜쓰지?
-	//똑같은이름의 변수를 번호를매겨서 쓰기위해
+	//똑같은이름의 변수를 번호를매겨서 쓰려고
 	//편하게 많이 만들라고
 
 	//구조체는
-	//멤버만큼 한번에 많이 만들려고 씀
+	//멤버만큼 가지고 있는 덩어리를 한번에 많이 만들라고 씁니다
 
-	/////////////////
-	 
-	//구조체 변수 선언   (구조체 변수 -> 객체)
-	struct CARD deck2[52]; //객체 배열
-	struct CARD card3;		//객체
-
-	//객체의 멤버값 초기화
-	card3.number = 3;
-	card3.shape = "A";
-
-	/////////////////
+	//구조체 변수 선언
+	struct CARD deck2[52]; //객체 배열 선언
+	struct CARD card3;		//객체 선언
 
 	for (int i = 0; i < 52; i++)
 	{
-		//멤버호출 객체 .
 		deck2[i].number = i % 13 + 1; //1~13
 
-		switch ((int)(i / 13))
+		switch (i / 13)
 		{
 		case 0:
 			//멤버호출
 			deck2[i].shape = "◆";
 			break;
 		case 1:
+			//멤버호출
 			deck2[i].shape = "♥";
 			break;
 		case 2:
+			//멤버호출
 			deck2[i].shape = "♠";
 			break;
 		case 3:
+			//멤버호출
 			deck2[i].shape = "♣";
 			break;
 		}
 		cout << deck2[i].shape << deck2[i].number << endl;
 	}
 
-	/////////////////
-
-	// 셔플을 사용할때
-
-	//셔플 알고리즘
-	for (int i = 0; i < 1000; i++)
-	{
-		int dest = rand() % 52; // 0~ 51
-		int sour = rand() % 52;
-		//스왑
-		//받는 왼쪽값도 객체로 맞춰준다.
-		struct CARD temp = deck2[dest]; //방번호 랜덤호출
-		deck2[dest] = deck2[sour];
-		deck2[sour] = temp;
-	}
-	//셔플 후 출력
-	for (int i = 0; i < 52; i++)
-	{
-		cout << deck2[i].shape << deck2[i].number << endl;
-
-	}
-
-	/////////////////
-
 	return 0;
 }
-
-
-
